@@ -1,16 +1,30 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import json
+import image_functions as img
+import pdf_functions as pdf
 
 
-# Press the green button in the gutter to run the script.
+
+def initialise_config(path: str) ->dict:
+    try:
+        with open(path, "r") as f:
+            config = json.loads(f.read())
+    except Exception as e:
+        print(f"Unable to initialise project {e}")
+        exit(1)
+    return config
+
+
+
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    config = initialise_config("config.json")
+    #
+    # image_url = img.get_dog_image_url(config['rest_api_url'])
+    #
+    # img.save_image(image_url)
+    # img.show_images()
+    #
+    # print(image_url)
+    pdf.create_pdf("pdf1.pdf")
