@@ -43,20 +43,22 @@ if __name__ == '__main__':
     3. Alege rasa de caine pe care ti-o doresti sa o gasesti    
     4. Exit
     """
-    user_pick = input(menu + " ")
 
-    match user_pick:
+    while True:
+        user_pick = input(menu + " ")
 
-        case "1":
-            image_url = img.get_dog_image_url(config['rest_api_url'])
-            img.save_image(image_url)
-        case "2":
-            img.save_image(image_url)
-        case "3":
-            pass
-        #
-        case "4":
-            exit()
+        match user_pick:
+
+            case "1":
+                image_url = img.get_dog_image_url(config['rest_api_url'])
+                img.save_image(image_url)
+            case "2":
+                img.save_image(image_url)
+            case "3":
+                pass
+            #
+            case "4":
+                exit()
 
     print("\n\n\n\n")
     user_pick = input(menu + " ")

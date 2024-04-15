@@ -24,14 +24,28 @@ def get_dog_image_url(url: str) -> str:
 def save_image(url: str, path: str ="images"):
     try:
         response = requests.get(url)
+        breed = url.split("/")[4]
+        breed = breed.replace("-", "_")
         timestamp = int(time.time())
         os.makedirs(path, exist_ok=True)
 
-        with open(f"{path}\\image_{str(timestamp)}.png", "wb") as f:
-            f.write(response.content)
+        timestamp = int(time.time())
+        filename = f"{path}\\image_{breed}_{timestamp}.png"
 
+        with open(filename, "wb") as f:
+            f.write(response.content)
+        print(f"Image saved as: {filename}")
     except Exception as e:
-        print(f"Failed to save image {e}")
+        print(f"Failed to save image: {e}")
+
+
+def get_available_breeds(path: str = "images") -> list:
+    breeds = set()
+    images_list = os.listdir(path)
+    for image_name in images_list:
+        breed = image_name.split('_')[1]
+        breeds.add(breed)
+    return sorted(list(breeds))
 
 
 def show_images(path: str = "images"):
